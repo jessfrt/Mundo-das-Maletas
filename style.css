@@ -313,3 +313,52 @@ em {
         gap: 0.5rem;
     }
 }
+/* Cards com botões */
+.item-colecao {
+    text-align: center;
+    margin-bottom: 2rem;
+  }
+  
+  .item-colecao img {
+    max-width: 100%;
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  }
+  
+  .obter-btn {
+    display: inline-block;
+    margin-top: 1rem;
+    padding: 0.6rem 1.5rem;
+    background-color: var(--dourado);
+    color: white;
+    border: none;
+    border-radius: 50px;
+    text-decoration: none;
+    font-weight: bold;
+    transition: background 0.3s ease;
+  }
+  
+  .obter-btn:hover {
+    background-color: #b18b2b;
+  }
+  
+  /* Carrinho */
+  .carrinho-ficticio {
+    background-color: var(--cinza-claro);
+    padding: 4rem 2rem;
+    text-align: center;
+    border-top: 2px dashed var(--dourado);
+    margin-top: 4rem;
+  }
+  
+  .carrinho-ficticio h2 {
+    color: var(--azul-escuro);
+    font-size: 2rem;
+    margin-bottom: 1rem;
+  }
+  
+  .carrinho-ficticio p {
+    font-size: 1.1rem;
+    color: #555;
+  }
+  
