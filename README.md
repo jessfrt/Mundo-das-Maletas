@@ -23,7 +23,9 @@ Mundo das Maletas é um catálogo demonstrativo que explora direção visual, ex
 - ESLint com configuração flat;
 - CSS global organizado por camadas e tokens.
 
-É necessário Node.js 20.19+ ou 22.12+ para a versão do Vite usada no projeto.
+O desenvolvimento local e a integração contínua usam Node.js 24 LTS. O arquivo `.nvmrc` permite selecionar a versão correta com um gerenciador compatível.
+
+As dependências são fixadas em versões exatas para manter instalações reproduzíveis. O projeto usa TypeScript 6.0.3 deliberadamente: `typescript-eslint@8.67.0` aceita TypeScript `>=4.8.4 <6.1.0`, por isso o TypeScript 7 não é compatível com esta matriz.
 
 ## Estrutura
 
@@ -42,7 +44,7 @@ src/
 ## Comandos
 
 ```bash
-npm install
+npm ci
 npm run dev
 npm run lint
 npm run typecheck
@@ -50,7 +52,27 @@ npm run build
 npm run preview
 ```
 
-O build é gerado em `dist/`. O Vite usa `base: './'`, fazendo com que os assets compilados tenham caminhos relativos. Essa decisão mantém a página única portátil em hospedagens sob subdiretórios, incluindo GitHub Pages, sem fixar domínio ou nome de conta.
+O build é gerado em `dist/`. O Vite usa `base: '/Mundo-das-Maletas/'` para produzir URLs compatíveis com o subdiretório do repositório no GitHub Pages.
+
+## Publicação
+
+O endereço esperado do projeto é [https://jessfrt.github.io/Mundo-das-Maletas/](https://jessfrt.github.io/Mundo-das-Maletas/).
+
+O navegador não executa os fontes TypeScript/React diretamente: o Vite precisa gerar o build antes da publicação. O workflow em `.github/workflows/deploy-pages.yml` instala as dependências com `npm ci`, executa lint, verificação de tipos e build, e envia somente `dist/` como artefato do GitHub Pages. O diretório `dist/` permanece fora do Git.
+
+O deploy é disparado automaticamente por um push na branch `main` ou manualmente pela opção `workflow_dispatch` na aba **Actions**. Depois do primeiro commit que inclua o workflow, configure uma única vez em **Settings → Pages → Build and deployment → Source** a opção **GitHub Actions**.
+
+Para reproduzir localmente com Node 24 LTS:
+
+```bash
+npm ci
+npm run lint
+npm run typecheck
+npm run build
+npm run preview
+```
+
+Como a base corresponde ao nome do repositório, valide o preview também em `http://localhost:4173/Mundo-das-Maletas/`.
 
 ## Decisões de UX e acessibilidade
 
@@ -74,4 +96,4 @@ As nove imagens originais foram preservadas em `maletas/`. O repositório não d
 - favoritos e sacola estritamente demonstrativos;
 - testes automatizados de componentes, acessibilidade e fluxos de teclado;
 - otimização e documentação de origem dos assets;
-- pipeline de publicação no GitHub Pages.
+- acompanhamento da primeira publicação no GitHub Pages e futuras atualizações mensais sugeridas pelo Dependabot.
